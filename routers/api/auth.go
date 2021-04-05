@@ -1,7 +1,6 @@
 package api
 
 import (
-	"log"
 	"net/http"
 
 	"github.com/astaxie/beego/validation"
@@ -9,6 +8,7 @@ import (
 
 	"github.com/lzyzsd/go-gin-blog/models"
 	"github.com/lzyzsd/go-gin-blog/pkg/e"
+	"github.com/lzyzsd/go-gin-blog/pkg/logging"
 	"github.com/lzyzsd/go-gin-blog/pkg/util"
 )
 
@@ -41,10 +41,11 @@ func GetAuth(c *gin.Context) {
 
 		} else {
 			code = e.ERROR_AUTH
+			logging.Info("auth username or password not exist ", username, password)
 		}
 	} else {
 		for _, err := range valid.Errors {
-			log.Println(err.Key, err.Message)
+			logging.Info(err.Key, err.Message)
 		}
 	}
 
