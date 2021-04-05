@@ -5,12 +5,12 @@ import (
 	"strconv"
 
 	"github.com/astaxie/beego/validation"
-	"github.com/lzyzsd/go-gin-example/pkg/e"
+	"github.com/lzyzsd/go-gin-blog/pkg/e"
 
 	"github.com/gin-gonic/gin"
-	"github.com/lzyzsd/go-gin-example/models"
-	"github.com/lzyzsd/go-gin-example/pkg/setting"
-	"github.com/lzyzsd/go-gin-example/pkg/util"
+	"github.com/lzyzsd/go-gin-blog/models"
+	"github.com/lzyzsd/go-gin-blog/pkg/setting"
+	"github.com/lzyzsd/go-gin-blog/pkg/util"
 )
 
 func GetTags(c *gin.Context) {

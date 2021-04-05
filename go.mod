@@ -1,4 +1,4 @@
-module github.com/lzyzsd/go-gin-example
+module github.com/lzyzsd/go-gin-blog
 
 go 1.16
 
@@ -28,11 +28,11 @@ require (
 )
 
 replace (
-	github.com/lzyzsd/go-gin-example/conf => D:\go-application\go-gin-example\pkg\conf
-	github.com/lzyzsd/go-gin-example/middleware => D:\go-application\go-gin-example\middleware
-	github.com/lzyzsd/go-gin-example/models => D:\go-application\go-gin-example\models
-	github.com/lzyzsd/go-gin-example/pkg/e => D:\go-application\go-gin-example\pkg\e
-	github.com/lzyzsd/go-gin-example/pkg/setting => D:\go-application\go-gin-example\pkg\setting
-	github.com/lzyzsd/go-gin-example/pkg/util => D:\go-application\go-gin-example\pkg\util
-	github.com/lzyzsd/go-gin-example/routers => D:\go-application\go-gin-example\routers
+	github.com/lzyzsd/go-gin-blog/conf => D:\go-application\go-gin-blog\pkg\conf
+	github.com/lzyzsd/go-gin-blog/middleware => D:\go-application\go-gin-blog\middleware
+	github.com/lzyzsd/go-gin-blog/models => D:\go-application\go-gin-blog\models
+	github.com/lzyzsd/go-gin-blog/pkg/e => D:\go-application\go-gin-blog\pkg\e
+	github.com/lzyzsd/go-gin-blog/pkg/setting => D:\go-application\go-gin-blog\pkg\setting
+	github.com/lzyzsd/go-gin-blog/pkg/util => D:\go-application\go-gin-blog\pkg\util
+	github.com/lzyzsd/go-gin-blog/routers => D:\go-application\go-gin-blog\routers
 )

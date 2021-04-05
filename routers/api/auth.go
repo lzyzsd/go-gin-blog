@@ -7,9 +7,9 @@ import (
 	"github.com/astaxie/beego/validation"
 	"github.com/gin-gonic/gin"
 
-	"github.com/lzyzsd/go-gin-example/models"
-	"github.com/lzyzsd/go-gin-example/pkg/e"
-	"github.com/lzyzsd/go-gin-example/pkg/util"
+	"github.com/lzyzsd/go-gin-blog/models"
+	"github.com/lzyzsd/go-gin-blog/pkg/e"
+	"github.com/lzyzsd/go-gin-blog/pkg/util"
 )
 
 type auth struct {

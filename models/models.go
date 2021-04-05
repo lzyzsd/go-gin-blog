@@ -11,7 +11,7 @@ import (
 	"gorm.io/gorm/logger"
 	"gorm.io/gorm/schema"
 
-	"github.com/lzyzsd/go-gin-example/pkg/setting"
+	"github.com/lzyzsd/go-gin-blog/pkg/setting"
 )
 
 var db *gorm.DB
