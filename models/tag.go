@@ -72,17 +72,17 @@ func ExistTagByID(id int) (bool, error) {
 	return false, nil
 }
 
-func AddTag(name string, state int, createdBy string) error {
+func AddTag(name string, state int, createdBy string) (Tag, error) {
 	tag := Tag{
 		Name:      name,
 		State:     state,
 		CreatedBy: createdBy,
 	}
 	if err := db.Create(&tag).Error; err != nil {
-		return err
+		return tag, err
 	}
 
-	return nil
+	return tag, nil
 }
 
 func DeleteTag(id int) error {

@@ -37,7 +37,20 @@ func (t *Tag) ExistByID() (bool, error) {
 }
 
 func (t *Tag) Add() error {
-	return models.AddTag(t.Name, t.State, t.CreatedBy)
+	var tag models.Tag
+	var err error
+	if tag, err = models.AddTag(t.Name, t.State, t.CreatedBy); err != nil {
+		return err
+	}
+	cache := cache_service.Tag{
+		State: t.State,
+
+		PageNum:  t.PageNum,
+		PageSize: t.PageSize,
+	}
+	key := cache.GetTagKey()
+	gredis.Set(key, tag, 3600)
+	return nil
 }
 
 func (t *Tag) Edit() error {
