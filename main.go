@@ -9,14 +9,31 @@ import (
 	"os/signal"
 	"time"
 
+	"github.com/lzyzsd/go-gin-blog/models"
+	"github.com/lzyzsd/go-gin-blog/pkg/logging"
 	"github.com/lzyzsd/go-gin-blog/pkg/setting"
 	"github.com/lzyzsd/go-gin-blog/routers"
 )
 
+type Server struct {
+	RunMode      string
+	HttpPort     int
+	ReadTimeout  time.Duration
+	WriteTimeout time.Duration
+}
+
+var ServerSetting = &Server{}
+
 func main() {
+	setting.Setup()
+	models.Setup()
+	logging.Setup()
+
+	endPoint := fmt.Sprintf(":%d", setting.ServerSetting.HttpPort)
+
 	router := routers.InitRouter()
 	s := &http.Server{
-		Addr:           fmt.Sprintf(":%d", setting.HTTPPort),
+		Addr:           endPoint,
 		Handler:        router,
 		ReadTimeout:    setting.ReadTimeout,
 		WriteTimeout:   setting.WriteTimeout,

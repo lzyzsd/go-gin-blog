@@ -5,22 +5,13 @@ import (
 	"log"
 	"os"
 	"time"
-)
 
-var (
-	LogSavePath = "runtime/logs/"
-	LogSaveName = "log"
-	LogFileExt  = "log"
-	TimeFormat  = "20060102"
+	"github.com/lzyzsd/go-gin-blog/pkg/setting"
 )
-
-func getLogFilePath() string {
-	return fmt.Sprintf("%s", LogSavePath)
-}
 
 func getLogFileFullPath() string {
-	prefixPath := getLogFilePath()
-	suffixPath := fmt.Sprintf("%s%s.%s", LogSaveName, time.Now().Format(TimeFormat), LogFileExt)
+	prefixPath := setting.AppSetting.LogSavePath
+	suffixPath := fmt.Sprintf("%s%s.%s", setting.AppSetting.LogSaveName, time.Now().Format(setting.AppSetting.TimeFormat), setting.AppSetting.LogFileExt)
 
 	return fmt.Sprintf("%s%s", prefixPath, suffixPath)
 }
@@ -44,7 +35,7 @@ func openLogFile(filePath string) *os.File {
 
 func mkDir() {
 	dir, _ := os.Getwd()
-	err := os.MkdirAll(dir+"/"+getLogFilePath(), os.ModePerm)
+	err := os.MkdirAll(dir+"/"+setting.AppSetting.LogSavePath, os.ModePerm)
 	if err != nil {
 		panic(err)
 	}
