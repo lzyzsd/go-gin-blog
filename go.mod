@@ -15,6 +15,7 @@ require (
 	github.com/go-playground/validator/v10 v10.5.0 // indirect
 	github.com/go-sql-driver/mysql v1.6.0 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
+	github.com/gomodule/redigo v2.0.0+incompatible // indirect
 	github.com/json-iterator/go v1.1.10 // indirect
 	github.com/kr/pty v1.1.5 // indirect
 	github.com/leodido/go-urn v1.2.1 // indirect
@@ -31,6 +32,7 @@ require (
 	github.com/swaggo/gin-swagger v1.3.0 // indirect
 	github.com/swaggo/swag v1.7.0 // indirect
 	github.com/ugorji/go v1.2.5 // indirect
+	github.com/unknwon/com v1.0.1 // indirect
 	github.com/urfave/cli v1.22.5 // indirect
 	github.com/urfave/cli/v2 v2.3.0 // indirect
 	golang.org/x/crypto v0.0.0-20210322153248-0c34fe9e7dc2 // indirect
@@ -51,4 +53,5 @@ replace (
 	github.com/lzyzsd/go-gin-blog/pkg/e => D:\go-application\go-gin-blog\pkg\e
 	github.com/lzyzsd/go-gin-blog/pkg/setting => D:\go-application\go-gin-blog\pkg\setting
 	github.com/lzyzsd/go-gin-blog/pkg/util => D:\go-application\go-gin-blog\pkg\util
+	github.com/lzyzsd/go-gin-blog/service/cache_service => D:\go-application\go-gin-blog\service\cache_service
 )

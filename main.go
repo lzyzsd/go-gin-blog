@@ -10,6 +10,7 @@ import (
 	"time"
 
 	"github.com/lzyzsd/go-gin-blog/models"
+	"github.com/lzyzsd/go-gin-blog/pkg/gredis"
 	"github.com/lzyzsd/go-gin-blog/pkg/logging"
 	"github.com/lzyzsd/go-gin-blog/pkg/setting"
 	"github.com/lzyzsd/go-gin-blog/routers"
@@ -28,6 +29,7 @@ func main() {
 	setting.Setup()
 	models.Setup()
 	logging.Setup()
+	gredis.Setup()
 
 	endPoint := fmt.Sprintf(":%d", setting.ServerSetting.HttpPort)
 
@@ -35,8 +37,8 @@ func main() {
 	s := &http.Server{
 		Addr:           endPoint,
 		Handler:        router,
-		ReadTimeout:    setting.ReadTimeout,
-		WriteTimeout:   setting.WriteTimeout,
+		ReadTimeout:    setting.ServerSetting.ReadTimeout,
+		WriteTimeout:   setting.ServerSetting.WriteTimeout,
 		MaxHeaderBytes: 1 << 20,
 	}
 

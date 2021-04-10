@@ -20,10 +20,14 @@ type Article struct {
 	State      int    `json:"state"`
 }
 
-func GetArticles(pageNum int, pageSize int, maps interface{}) (articles []Article) {
-	db.Preload("Tag").Where(maps).Offset(pageNum).Limit(pageSize).Find(&articles)
+func GetArticles(pageNum int, pageSize int, maps interface{}) ([]*Article, error) {
+	var articles []*Article
+	err := db.Preload("Tag").Where(maps).Offset(pageNum).Limit(pageSize).Find(&articles).Error
+	if err != nil && err != gorm.ErrRecordNotFound {
+		return nil, err
+	}
 
-	return
+	return articles, nil
 }
 
 func GetArticle(id int) (article Article) {
@@ -31,10 +35,13 @@ func GetArticle(id int) (article Article) {
 	return
 }
 
-func GetArticleTotal(maps interface{}) (count int64) {
-	db.Model(&Article{}).Where(maps).Count(&count)
+func GetArticleTotal(maps interface{}) (int64, error) {
+	var count int64
+	if err := db.Model(&Article{}).Where(maps).Count(&count).Error; err != nil {
+		return 0, err
+	}
 
-	return
+	return count, nil
 }
 
 func ExistArticleByName(name string) bool {
@@ -43,10 +50,18 @@ func ExistArticleByName(name string) bool {
 	return article.ID > 0
 }
 
-func ExistArticleByID(id int) bool {
+func ExistArticleByID(id int) (bool, error) {
 	var article Article
-	db.Select("id").Where("id = ?", id).First(&article)
-	return article.ID > 0
+	err := db.Select("id").Where("id = ? AND deleted_on = ? ", id, 0).First(&article).Error
+	if err != nil && err != gorm.ErrRecordNotFound {
+		return false, err
+	}
+
+	if article.ID > 0 {
+		return true, nil
+	}
+
+	return false, nil
 }
 
 func AddArticle(data map[string]interface{}) bool {
@@ -62,16 +77,20 @@ func AddArticle(data map[string]interface{}) bool {
 	return true
 }
 
-func DeleteArticle(id int) bool {
-	db.Where("id = ?", id).Delete(&Article{})
+func DeleteArticle(id int) error {
+	if err := db.Where("id = ?", id).Delete(Article{}).Error; err != nil {
+		return err
+	}
 
-	return true
+	return nil
 }
 
-func EditArticle(id int, data interface{}) bool {
-	db.Model(&Article{}).Where("id = ?", id).Updates(data)
+func EditArticle(id int, data interface{}) error {
+	if err := db.Model(&Article{}).Where("id = ?", id).Updates(data).Error; err != nil {
+		return err
+	}
 
-	return true
+	return nil
 }
 
 func (article *Article) BeforeCreate(tx *gorm.DB) error {
